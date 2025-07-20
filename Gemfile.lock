@@ -365,6 +365,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   kamal
+  net-pop (~> 0.1.2)
   pagy
   pry
   puma (>= 5.0)
