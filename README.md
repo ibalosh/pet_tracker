@@ -1,10 +1,10 @@
 # 🐾 Pet Tracker API
 
+[![CI](https://github.com/ibalosh/pet_tracker/actions/workflows/ci.yml/badge.svg)](https://github.com/ibalosh/pet_tracker/actions/workflows/ci.yml)
+
 This is a Ruby on Rails API-only application that tracks pets (dogs and cats) using various types of trackers and reports how many 
 are currently outside the power saving zone grouped by pet type and tracker type. The system supports both data ingestion and querying 
 via a REST API.
-
----
 
 ## 🚀 Getting Started
 
@@ -32,7 +32,6 @@ bin/rails db:setup
 ```bash
 bundle exec rspec
 ```
----
 
 ## 🌱 Seeded Data
 
@@ -48,8 +47,6 @@ bundle exec rspec
 ## 📬 API Reference
 
 Detailed API usage and endpoints are documented in [API_REFERENCE.md](API_REFERENCE.md)
-
----
 
 ## 🛠 Design Notes
 
