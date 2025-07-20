@@ -16,7 +16,6 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3.3'
           bundler-cache: true
 
       - name: Scan for common Rails security vulnerabilities using static analysis
@@ -24,6 +23,7 @@ jobs:
 
   lint:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -31,7 +31,6 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3.3'
           bundler-cache: true
 
       - name: Lint code for consistent style
@@ -39,6 +38,7 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -46,13 +46,10 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3.3'
           bundler-cache: true
 
-      - name: Setup Database
-        run: |
-          cp config/database.yml.github config/database.yml
-          bin/rails db:prepare
+      - name: Prepare database
+        run: bin/rails db:prepare
 
       - name: Run tests
         run: bundle exec rspec
