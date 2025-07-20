@@ -70,9 +70,7 @@ jobs:
         run: bundle install
 
       - name: Set up database
-        run: |
-          cp config/database.yml.github config/database.yml
-          bin/rails db:prepare
+        run: bin/rails db:prepare
 
       - name: Run tests
         run: bundle exec rspec
