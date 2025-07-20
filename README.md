@@ -2,66 +2,57 @@
 
 [![CI](https://github.com/ibalosh/pet_tracker/actions/workflows/ci.yml/badge.svg)](https://github.com/ibalosh/pet_tracker/actions/workflows/ci.yml)
 
-This is a Ruby on Rails API-only application that tracks pets (dogs and cats) using various types of trackers and reports how many 
-are currently outside the power saving zone grouped by pet type and tracker type. The system supports both data ingestion and querying 
-via a REST API.
+Ruby on Rails API-only app that tracks pets using various types of trackers and reports how many are currently outside the 
+power saving zone grouped by pet type and tracker type. The system supports both data ingestion and querying via a REST API.
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Requirements
-- Ruby 3.3.3
+- Ruby version in `.ruby-version` file 
 - Rails 7+
 - Bundler
 - SQLite (in-memory, no setup needed)
 
 ### Setup
 
-Clone the repository first and in root folder run:
+1. Clone the repository 
+2. Execute the below commands, in root folder to install gem, loads the schema and seeds example data
 
 ```bash
 bundle install
 bin/rails db:setup
 ```
 
-> ✅ `db:setup` loads the schema and seeds example data.
+`db/seeds.rb` creates:
 
----
+- Species
+- Tracker Types
+- Trackers
+- Owners and Pets
 
-## 🧪 Running Tests
+## Running Tests
+
+To run the test suite, execute the following command in the root folder
 
 ```bash
 bundle exec rspec
 ```
 
-## 🌱 Seeded Data
-
-`db/seeds.rb` creates:
-
-- Species 
-- Tracker Types
-- Trackers 
-- Owners and Pets
-
----
-
-## 📬 API Reference
+## API Reference
 
 Detailed API usage and endpoints are documented in [API_REFERENCE.md](API_REFERENCE.md)
 
-## 🛠 Design Notes
+## Design Notes
 
 - Normalized db schema
-- In-memory SQLite for easy testing & setup
-- Ready to swap database backend
-- Clean controllers, pagination extracted
-
----
+- In-memory SQLite for easy testing & setup & swapping
+- API endpoints for data ingestion and querying, with pagination
 
 ## 🗂 Postman Collection
 
 A Postman collection with all requests is included in the repo as `postman_collection.json` in docs folder.
 
-## 🐾 Quick API Demo with `curl`
+## Quick API Demo with `curl`
 
 You can use the following `curl` commands to manually create and retrieve data, verifying the main functionality without relying on seed data.
 
