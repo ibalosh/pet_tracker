@@ -56,5 +56,3 @@ group :test do
   gem "faker"               # For generating fake data
   gem "database_cleaner-active_record" # For test isolation
 end
-
-gem 'net-pop', '~> 0.1.2'
