@@ -2,7 +2,11 @@ class TrackersController < ApplicationController
   before_action :find_tracker, only: [ :show, :update, :destroy ]
   def index
     trackers = Tracker.includes(:tracker_type, pet: :species)
-    render json: trackers.map { |t| TrackerSerializer.new(t).as_json }
+
+    pagination_details, paginated_data = pagy(trackers)
+    paginated_data_json = paginated_data.map { |t| TrackerSerializer.new(t).as_json }
+
+    render json: paginated_response("trackers", paginated_data_json, pagination_details)
   end
 
   # app/controllers/trackers_controller.rb

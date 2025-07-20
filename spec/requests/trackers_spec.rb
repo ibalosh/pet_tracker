@@ -17,12 +17,17 @@ RSpec.describe "Trackers", type: :request do
 
       get "/trackers"
       json = JSON.parse(response.body)
+      trackers = json["trackers"]
+      pagination = json["pagination"]
 
       expect(response).to have_http_status(:ok)
-      expect(json.size).to eq(3)
-      expect(json.first["pet"]["name"]).to eq(pet.name)
-      expect(json.first["pet"]["species"]["name"]).to eq(pet.species.name)
-      expect(json.first["tracker_type"]["category"]).to eq(tracker_type.category)
+      expect(trackers.size).to eq(3)
+      expect(trackers.first["pet"]["name"]).to eq(pet.name)
+      expect(trackers.first["pet"]["species"]["name"]).to eq(pet.species.name)
+      expect(trackers.first["tracker_type"]["category"]).to eq(tracker_type.category)
+      expect(pagination["total_count"]).to eq(3)
+      expect(pagination["current_page"]).to eq(1)
+      expect(pagination["total_pages"]).to eq(1)
     end
   end
 
