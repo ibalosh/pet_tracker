@@ -16,19 +16,14 @@ power saving zone grouped by pet type and tracker type. The system supports both
 ### Setup
 
 1. Clone the repository 
-2. Execute the below commands, in root folder to install gem, loads the schema and seeds example data
+2. Execute the below commands, in root folder of the Rails app, to install gem, loads the schema and seeds example data
 
 ```bash
 bundle install
 bin/rails db:setup
 ```
 
-`db/seeds.rb` creates:
-
-- Species
-- Tracker Types
-- Trackers
-- Owners and Pets
+`db/seeds.rb` creates a few example records for testing purposes.
 
 ## Running Tests
 
@@ -38,23 +33,24 @@ To run the test suite, execute the following command in the root folder
 bundle exec rspec
 ```
 
-## API Reference
+## API Notes
 
 Detailed API usage and endpoints are documented in [API_REFERENCE.md](API_REFERENCE.md)
 
-## Design Notes
+### Design Notes
 
 - Normalized db schema
 - In-memory SQLite for easy testing & setup & swapping
 - API endpoints for data ingestion and querying, with pagination
 
-## 🗂 Postman Collection
+### Postman Collection
 
-A Postman collection with all requests is included in the repo as `postman_collection.json` in docs folder.
+A Postman collection with all requests is included in the repo as `postman_collection.json` in **docs** folder.
 
-## Quick API Demo with `curl`
+### Quick API Demo with `curl`
 
-You can use the following `curl` commands to manually create and retrieve data, verifying the main functionality without relying on seed data.
+You can use the following `curl` commands to manually create and retrieve data, verifying the main 
+functionality without relying on seed data.
 
 ### 1. Create Species
 

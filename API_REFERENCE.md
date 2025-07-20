@@ -2,9 +2,7 @@
 
 All data is exchanged as JSON.
 
----
-
-## Owners
+### Owners
 
 | Method | Endpoint           | Description                     |
 |--------|--------------------|---------------------------------|
@@ -14,9 +12,7 @@ All data is exchanged as JSON.
 | PATCH  | `/owners/:id`      | Update owner                    |
 | DELETE | `/owners/:id`      | Delete owner                    |
 
----
-
-## Species
+### Species
 
 | Method | Endpoint       | Description          |
 |--------|----------------|----------------------|
@@ -26,9 +22,7 @@ All data is exchanged as JSON.
 | PATCH  | `/species/:id` | Update species       |
 | DELETE | `/species/:id` | Delete species       |
 
----
-
-## Tracker Types
+### Tracker Types
 
 | Method | Endpoint               | Description                              |
 |--------|------------------------|------------------------------------------|
@@ -37,9 +31,8 @@ All data is exchanged as JSON.
 | POST   | `/tracker_types`       | Create tracker type (unique per species) |
 | PATCH  | `/tracker_types/:id`   | Update tracker_type                      |
 | DELETE | `/tracker_types/:id`   | Delete tracker_type                      |
----
 
-## Pets
+### Pets
 
 | Method | Endpoint        | Description                          |
 |--------|-----------------|--------------------------------------|
@@ -51,9 +44,7 @@ All data is exchanged as JSON.
 
 > 🐱 Cats support `lost_tracker: true/false`.
 
----
-
-## Trackers
+### Trackers
 
 | Method | Endpoint        | Description                        |
 |--------|-----------------|------------------------------------|
@@ -63,15 +54,13 @@ All data is exchanged as JSON.
 | PATCH  | `/trackers/:id` | Update tracker zone status         |
 | DELETE | `/trackers/:id` | Remove tracker                     |
 
----
-
-## Tracker Summaries
+### Tracker Summaries
 
 | Method | Endpoint             | Description                                                   |
 |--------|----------------------|---------------------------------------------------------------|
 | GET    | `/tracker_summaries` | Returns count of pets outside zone, grouped by tracker/species |
 
-### Query Parameters:
+#### Query Parameters:
 
 - `in_zone=true/false`
 - `pet_type=Dog|Cat`
