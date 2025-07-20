@@ -23,6 +23,12 @@ bundle install
 bin/rails db:setup
 ```
 
+Once the setup is complete, you can start the Rails server:
+
+```bash
+bin/rails server
+```
+
 `db/seeds.rb` creates a few example records for testing purposes.
 
 ## Running Tests
@@ -42,6 +48,21 @@ Detailed API usage and endpoints are documented in [API_REFERENCE.md](API_REFERE
 - Normalized db schema
 - In-memory SQLite for easy testing & setup & swapping
 - API endpoints for data ingestion and querying, with pagination
+
+#### Assumptions
+
+- `in_zone` is **not calculated dynamically**, but a stored boolean field in the `trackers` table.
+- The `lost_tracker` attribute:
+    - Is only valid for **cats**.
+    - Enforced via a model validation on trackers
+- The `/tracker_summaries` endpoint applies filters as follows:
+    - If the `in_zone` filter is provided, only **trackers with `lost_tracker: false`** are included.
+    - If the `in_zone` filter is **not provided**, **lost trackers are also included**.
+    - Filtering by `pet_type` (e.g. `"Dog"` or `"Cat"`) and `tracker_type` (e.g. `"small"`, `"medium"`) is optional.
+    - If no filters are provided, all trackers are included in the summary.
+- The summary data is grouped by:
+    - `species_id` (i.e. pet type)
+    - `tracker_type_id` (i.e. tracker type)
 
 ### Postman Collection
 
