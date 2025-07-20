@@ -22,7 +22,7 @@ RSpec.describe "TrackerSummaries", type: :request do
       Tracker.create!(pet: pet1, tracker_type: type, in_zone: false)
       Tracker.create!(pet: pet2, tracker_type: type, in_zone: false)
 
-      get "/tracker_summaries"
+      get "/tracker_summaries", params: { in_zone: false }
       json = JSON.parse(response.body)
 
       expect(json["tracker_summaries"].size).to eq(1)
@@ -45,14 +45,14 @@ RSpec.describe "TrackerSummaries", type: :request do
       Tracker.create!(pet: pet1, tracker_type: type, in_zone: false)
       Tracker.create!(pet: pet2, tracker_type: type, in_zone: false)
 
-      get "/tracker_summaries"
+      get "/tracker_summaries", params: { in_zone: false }
       json = JSON.parse(response.body)
 
       expect(json["tracker_summaries"].size).to eq(1)
       expect(json["tracker_summaries"].first["count"]).to eq(2)
     end
 
-    it "returns summary without filters" do
+    it "returns summary without filters where default in_zone will be used" do
       dog = Species.create!(name: "Dog")
       tracker_type = TrackerType.create!(category: "medium", species: dog)
       owner = Owner.create!(name: "Bob", email: "bob@example.com")

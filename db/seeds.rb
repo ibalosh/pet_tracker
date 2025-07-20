@@ -49,7 +49,7 @@ pets.each_with_index do |pet, i|
   Tracker.create!(
     pet: pet,
     tracker_type: tracker_type,
-    lost_tracker: pet.species.name == "Cat" ? [ true, false ].sample : nil,
+    lost_tracker: pet.species.name == "Cat" ? [ true, false ].sample : false,
     in_zone: i % 3 != 0 # Some pets out of zone
   )
 end

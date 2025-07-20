@@ -13,7 +13,7 @@
 ActiveRecord::Schema[8.0].define(version: 2025_07_18_112822) do
   create_table "owners", force: :cascade do |t|
     t.string "name", limit: 200, null: false
-    t.string "email", limit: 200
+    t.string "email", limit: 200, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_owners_on_email", unique: true
@@ -48,7 +48,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_18_112822) do
   create_table "trackers", force: :cascade do |t|
     t.integer "pet_id", null: false
     t.integer "tracker_type_id", null: false
-    t.boolean "lost_tracker", default: false
+    t.boolean "lost_tracker", default: false, null: false
     t.boolean "in_zone", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

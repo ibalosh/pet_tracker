@@ -56,8 +56,8 @@ Detailed API usage and endpoints are documented in [API_REFERENCE.md](API_REFERE
     - Is only valid for **cats**.
     - Enforced via a model validation on trackers
 - The `/tracker_summaries` endpoint applies filters as follows:
-    - If the `in_zone` filter is provided, only **trackers with `lost_tracker: false`** are included.
-    - If the `in_zone` filter is **not provided**, **lost trackers are also included**.
+    - If the `in_zone` filter is **not provided**, it's used by default value `false`
+    - Only **trackers with `lost_tracker: false`** are included in the summary
     - Filtering by `pet_type` (e.g. `"Dog"` or `"Cat"`) and `tracker_type` (e.g. `"small"`, `"medium"`) is optional.
     - If no filters are provided, all trackers are included in the summary.
 - The summary data is grouped by:
@@ -108,6 +108,8 @@ curl -X POST http://localhost:3000/pets \
 ```
 
 ### 4. Create Trackers and Trackers Summaries
+
+With no filter set, `in_zone` filter will be set to false.
 
 ```bash
 curl -X POST http://localhost:3000/trackers \

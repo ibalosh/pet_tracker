@@ -18,6 +18,7 @@ class TrackerSummarySerializer
           category: @tracker_type_map[s.tracker_type_id]&.category || "Unknown"
         },
         in_zone: s.in_zone,
+        lost_tracker: s.lost_tracker,
         count: s.count
       }
     end
