@@ -1,0 +1,18 @@
+Rails.application.routes.draw do
+  root "home#index"
+
+  resources :owners, only: [ :index, :show, :create, :update, :destroy ]
+  resources :pets, only: [ :index, :show, :create, :update, :destroy ]
+  resources :species, only: [ :index, :show, :create, :update, :destroy ]
+
+  resources :trackers, only: [ :index, :show, :update, :create, :destroy ]
+  resources :tracker_types, only: [ :index, :show, :create, :update, :destroy ]
+  resources :tracker_summaries, only: [ :index ]
+
+  # For non existing routes, show a custom default error message
+  match "*unmatched", to: "application#render_route_not_found", via: :all
+
+  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
+  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  get "up" => "rails/health#show", as: :rails_health_check
+end
