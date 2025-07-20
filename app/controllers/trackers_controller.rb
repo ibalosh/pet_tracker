@@ -8,8 +8,6 @@ class TrackersController < ApplicationController
 
     render json: paginated_response("trackers", paginated_data_json, pagination_details)
   end
-
-  # app/controllers/trackers_controller.rb
   def show
     render json: TrackerSerializer.new(@tracker).as_json
   end

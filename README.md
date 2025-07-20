@@ -103,8 +103,7 @@ curl -X POST http://localhost:3000/pets \
   -d '{
     "name": "Whiskers",
     "owner_id": 1,
-    "species_id": 1,
-    "lost_tracker": false
+    "species_id": 1
   }'
 ```
 
