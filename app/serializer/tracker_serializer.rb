@@ -4,22 +4,22 @@ class TrackerSerializer
     @tracker = tracker
   end
 
-  def as_json(*)
+  def as_json
     {
       id: @tracker.id,
       in_zone: @tracker.in_zone,
       lost_tracker: @tracker.lost_tracker,
       pet: {
-        id: @tracker.pet.id,
-        name: @tracker.pet.name,
+        id: @tracker.pet_id,
+        name: @tracker.pet_name,
         species: {
-          id: @tracker.pet.species.id,
-          name: @tracker.pet.species.name
+          id: @tracker.pet.species_id,
+          name: @tracker.pet.species_name
         }
       },
       tracker_type: {
-        id: @tracker.tracker_type.id,
-        category: @tracker.tracker_type.category
+        id: @tracker.tracker_type_id,
+        category: @tracker.tracker_type_category
       }
     }
   end

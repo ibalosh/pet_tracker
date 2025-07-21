@@ -2,6 +2,9 @@ class Tracker < ApplicationRecord
   belongs_to :pet
   belongs_to :tracker_type
 
+  delegate :name, :id, to: :pet, prefix: true
+  delegate :category, :id, to: :tracker_type, prefix: true
+
   validate :lost_tracker_only_for_cats
 
   def lost_tracker_only_for_cats
