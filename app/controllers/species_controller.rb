@@ -2,7 +2,7 @@ class SpeciesController < ApplicationController
   before_action :find_species, only: [ :show, :update, :destroy ]
   def index
     page_obj, data = pagy(Species.all)
-    render json: paged_response(SpeciesSerializer.collection(data), page_obj)
+    render json: paged_response("species", SpeciesSerializer.collection(data), page_obj)
   end
 
   def show
@@ -16,7 +16,7 @@ class SpeciesController < ApplicationController
 
   def update
     @species.update!(species_params)
-    render json: SpeciesSerializer.new(@species).as_json, status: :ok
+    render json: SpeciesSerializer.new(@species).as_json
   end
 
   def destroy

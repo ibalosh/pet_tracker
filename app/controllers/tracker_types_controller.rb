@@ -3,21 +3,21 @@ class TrackerTypesController < ApplicationController
 
   def index
     page_obj, data = pagy(TrackerType.all.includes(:species))
-    render json: paged_response(data, page_obj)
+    render json: paged_response("tracker_types", TrackerTypeSerializer.collection(data), page_obj)
   end
 
   def show
-    render json: @tracker_type
+    render json: TrackerTypeSerializer.new(@tracker_type).as_json
   end
 
   def create
     tracker_type = TrackerType.create!(tracker_type_params)
-    render json: tracker_type, status: :created
+    render json: TrackerTypeSerializer.new(tracker_type).as_json, status: :created
   end
 
   def update
     @tracker_type.update!(tracker_type_params)
-    render json: @tracker_type, status: :ok
+    render json: TrackerTypeSerializer.new(@tracker_type).as_json, status: :ok
   end
 
   def destroy

@@ -1,5 +1,4 @@
-# app/serializers/tracker_serializer.rb
-class TrackerSerializer
+class TrackerSerializer < BaseSerializer
   def initialize(tracker)
     @tracker = tracker
   end

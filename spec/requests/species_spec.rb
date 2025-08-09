@@ -13,7 +13,7 @@ RSpec.describe "Species", type: :request do
       get "/species"
       json = JSON.parse(response.body)
 
-      species = json["data"]
+      species = json["species"]
       pagination = json["meta"]
 
       expect(response).to have_http_status(:ok)
@@ -29,7 +29,7 @@ RSpec.describe "Species", type: :request do
       get "/species", params: { page: 2 }
       json = JSON.parse(response.body)
 
-      species = json["data"]
+      species = json["species"]
       pagination = json["meta"]
 
       expect(response).to have_http_status(:ok)
@@ -57,7 +57,7 @@ RSpec.describe "Species", type: :request do
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:not_found)
-      expect(json["error"]).to include("Couldn't find")
+      expect(json["errors"].to_s).to include("Couldn't find")
     end
   end
 
@@ -139,7 +139,7 @@ RSpec.describe "Species", type: :request do
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:not_found)
-      expect(json["error"]).to include("Couldn't find")
+      expect(json["errors"].to_s).to include("Couldn't find")
     end
   end
 
@@ -159,7 +159,7 @@ RSpec.describe "Species", type: :request do
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:not_found)
-      expect(json["error"]).to include("Couldn't find")
+      expect(json["errors"].to_s).to include("Couldn't find")
     end
   end
 end

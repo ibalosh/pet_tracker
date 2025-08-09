@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "data", type: :request do
+RSpec.describe "Owners", type: :request do
   describe "GET /owners" do
     it "returns http success" do
       get "/owners"
@@ -13,7 +13,7 @@ RSpec.describe "data", type: :request do
       get "/owners"
       json = JSON.parse(response.body)
 
-      owners = json["data"]
+      owners = json["owners"]
       pagination = json["meta"]
 
       expect(response).to have_http_status(:ok)
@@ -29,7 +29,7 @@ RSpec.describe "data", type: :request do
       get "/owners", params: { page: 2, items: 5 }
       json = JSON.parse(response.body)
 
-      owners = json["data"]
+      owners = json["owners"]
       pagination = json["meta"]
 
       expect(response).to have_http_status(:ok)
@@ -57,7 +57,7 @@ RSpec.describe "data", type: :request do
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:not_found)
-      expect(json["error"]).to include("Couldn't find")
+      expect(json["errors"].to_s).to include("Couldn't find")
     end
   end
 
@@ -142,7 +142,7 @@ RSpec.describe "data", type: :request do
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:not_found)
-      expect(json["error"]).to include("Couldn't find")
+      expect(json["errors"].to_s).to include("Couldn't find")
     end
   end
 
@@ -162,7 +162,7 @@ RSpec.describe "data", type: :request do
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:not_found)
-      expect(json["error"]).to include("Couldn't find")
+      expect(json["errors"].to_s).to include("Couldn't find")
     end
   end
 end

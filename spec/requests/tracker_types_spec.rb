@@ -14,7 +14,7 @@ RSpec.describe "TrackerTypes", type: :request do
       get "/tracker_types"
       json = JSON.parse(response.body)
 
-      tracker_types = json["data"]
+      tracker_types = json["tracker_types"]
       pagination = json["meta"]
 
       expect(response).to have_http_status(:ok)
@@ -29,7 +29,7 @@ RSpec.describe "TrackerTypes", type: :request do
       get "/tracker_types", params: { page: 2, items: 5 }
       json = JSON.parse(response.body)
 
-      tracker_types = json["data"]
+      tracker_types = json["tracker_types"]
       pagination = json["meta"]
 
       expect(response).to have_http_status(:ok)
@@ -55,7 +55,7 @@ RSpec.describe "TrackerTypes", type: :request do
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:not_found)
-      expect(json["error"]).to include("Couldn't find")
+      expect(json["errors"].to_s).to include("Couldn't find")
     end
   end
 
@@ -75,7 +75,7 @@ RSpec.describe "TrackerTypes", type: :request do
 
       json = JSON.parse(response.body)
       expect(response).to have_http_status(:unprocessable_entity)
-      expect(json["errors"]).to include("Category can't be blank")
+      expect(json["errors"].to_s).to include("Category can't be blank")
     end
 
     it "returns error when species_id is missing" do
@@ -83,7 +83,7 @@ RSpec.describe "TrackerTypes", type: :request do
 
       json = JSON.parse(response.body)
       expect(response).to have_http_status(:unprocessable_entity)
-      expect(json["errors"]).to include("Species must exist")
+      expect(json["errors"].to_s).to include("Species must exist")
     end
 
     it "rejects duplicate category for the same species" do
@@ -94,7 +94,7 @@ RSpec.describe "TrackerTypes", type: :request do
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
-      expect(json["errors"]).to include("Category has already been taken")
+      expect(json["errors"].to_s).to include("Category has already been taken")
     end
 
     it "allows same category for different species" do
@@ -129,7 +129,7 @@ RSpec.describe "TrackerTypes", type: :request do
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
-      expect(json["errors"]).to include("Category has already been taken")
+      expect(json["errors"].to_s).to include("Category has already been taken")
     end
 
     it "returns validation error for blank category" do
@@ -138,7 +138,7 @@ RSpec.describe "TrackerTypes", type: :request do
 
       json = JSON.parse(response.body)
       expect(response).to have_http_status(:unprocessable_entity)
-      expect(json["errors"]).to include("Category can't be blank")
+      expect(json["errors"].to_s).to include("Category can't be blank")
     end
 
     it "returns not found for non-existent tracker type" do
@@ -146,7 +146,7 @@ RSpec.describe "TrackerTypes", type: :request do
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:not_found)
-      expect(json["error"]).to include("Couldn't find")
+      expect(json["errors"].to_s).to include("Couldn't find")
     end
   end
 
@@ -165,7 +165,7 @@ RSpec.describe "TrackerTypes", type: :request do
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:not_found)
-      expect(json["error"]).to include("Couldn't find")
+      expect(json["errors"].to_s).to include("Couldn't find")
     end
   end
 end

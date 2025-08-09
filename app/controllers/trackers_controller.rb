@@ -2,9 +2,7 @@ class TrackersController < ApplicationController
   before_action :find_tracker, only: [ :show, :update, :destroy ]
   def index
     page_obj, data = pagy(Tracker.includes(:tracker_type, pet: :species))
-    data = data.map { |t| TrackerSerializer.new(t).as_json }
-
-    render json: paged_response(data, page_obj)
+    render json: paged_response("trackers", TrackerSerializer.collection(data), page_obj)
   end
   def show
     render json: TrackerSerializer.new(@tracker).as_json
@@ -12,12 +10,12 @@ class TrackersController < ApplicationController
 
   def create
     tracker = Tracker.create!(tracker_params)
-    render json: tracker, status: :created
+    render json: TrackerSerializer.new(tracker).as_json, status: :created
   end
 
   def update
     @tracker.update!(tracker_params)
-    render json: @tracker, status: :ok
+    render json: TrackerSerializer.new(@tracker).as_json
   end
 
   def destroy

@@ -17,7 +17,7 @@ RSpec.describe "Trackers", type: :request do
 
       get "/trackers"
       json = JSON.parse(response.body)
-      trackers = json["data"]
+      trackers = json["trackers"]
       pagination = json["meta"]
 
       expect(response).to have_http_status(:ok)
@@ -47,7 +47,7 @@ RSpec.describe "Trackers", type: :request do
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:not_found)
-      expect(json["error"]).to include("Couldn't find")
+      expect(json["errors"].to_s).to include("Couldn't find")
     end
   end
 

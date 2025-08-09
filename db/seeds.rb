@@ -5,6 +5,11 @@ Owner.destroy_all
 TrackerType.destroy_all
 Species.destroy_all
 
+puts "Creating owners..."
+owners = 10.times.map do |i|
+  Owner.create!(name: Faker::Name.name, email: Faker::Internet.email)
+end
+
 puts "Creating species..."
 cat = Species.create!(name: "Cat")
 dog = Species.create!(name: "Dog")
@@ -16,11 +21,6 @@ end
 
 dog_tracker_types = %w[small medium large].map do |category|
   TrackerType.create!(category: category, species: dog)
-end
-
-puts "Creating owners..."
-owners = 10.times.map do |i|
-  Owner.create!(name: "Owner #{i + 1}", email: "owner#{i + 1}@example.com")
 end
 
 puts "Creating pets..."
