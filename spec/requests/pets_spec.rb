@@ -57,9 +57,8 @@ RSpec.describe "Pets", type: :request do
 
   describe "POST /pets" do
     it "creates a new pet" do
-      post "/pets", params: {
+      post "/owners/#{owner.id}/pets", params: {
         name: "Whiskers",
-        owner_id: owner.id,
         species_id: species.id
       }
 
@@ -70,8 +69,7 @@ RSpec.describe "Pets", type: :request do
     end
 
     it "fails with missing name" do
-      post "/pets", params: {
-        owner_id: owner.id,
+      post "/owners/#{owner.id}/pets", params: {
         species_id: species.id
       }
 
@@ -82,9 +80,8 @@ RSpec.describe "Pets", type: :request do
     end
 
     it "fails with invalid owner_id" do
-      post "/pets", params: {
+      post "/owners/999/pets", params: {
         name: "BadPet",
-        owner_id: 999,
         species_id: species.id
       }
 
@@ -99,7 +96,7 @@ RSpec.describe "Pets", type: :request do
     it "updates a pet" do
       pet = create(:pet, name: "Old", owner: owner, species: species)
 
-      patch "/pets/#{pet.id}", params: { name: "New" }
+      patch "/owners/#{owner.id}/pets/#{pet.id}", params: { name: "New" }
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:ok)
@@ -109,7 +106,7 @@ RSpec.describe "Pets", type: :request do
     it "returns validation error on blank name" do
       pet = create(:pet, owner: owner, species: species)
 
-      patch "/pets/#{pet.id}", params: { name: "" }
+      patch "/owners/#{owner.id}/pets/#{pet.id}", params: { name: "" }
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
@@ -117,7 +114,7 @@ RSpec.describe "Pets", type: :request do
     end
 
     it "returns 404 for non-existent pet" do
-      patch "/pets/999", params: { name: "Ghost" }
+      patch "/owners/#{owner.id}/pets/999", params: { name: "Ghost" }
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:not_found)

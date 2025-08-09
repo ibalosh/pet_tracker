@@ -2,21 +2,21 @@ class SpeciesController < ApplicationController
   before_action :find_species, only: [ :show, :update, :destroy ]
   def index
     page_obj, data = pagy(Species.all)
-    render json: paged_response(data, page_obj)
+    render json: paged_response(SpeciesSerializer.collection(data), page_obj)
   end
 
   def show
-    render json: @species
+    render json: SpeciesSerializer.new(@species)
   end
 
   def create
     species = Species.create!(species_params)
-    render json: species, status: :created
+    render json: SpeciesSerializer.new(species).as_json, status: :created
   end
 
   def update
     @species.update!(species_params)
-    render json: @species, status: :ok
+    render json: SpeciesSerializer.new(@species).as_json, status: :ok
   end
 
   def destroy

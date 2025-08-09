@@ -1,22 +1,22 @@
 class PetsController < ApplicationController
-  before_action :find_pet, only: [ :show, :update, :destroy ]
+  before_action :find_pet, only: [ :show, :destroy, :update ]
   def index
     page_obj, data = pagy(Pet.includes(:species, :owner).all)
-    render json: paged_response(data, page_obj)
+    render json: paged_response(PetSerializer.collection(data), page_obj)
   end
 
   def show
-    render json: @pet
+    render json: PetSerializer.new(@pet).as_json
   end
 
   def create
     pet = Pet.create!(pet_params)
-    render json: pet, status: :created
+    render json: PetSerializer.new(pet).as_json, status: :created
   end
 
   def update
     @pet.update!(pet_params)
-    render json: @pet, status: :ok
+    render json: PetSerializer.new(@pet).as_json
   end
 
   def destroy
@@ -27,7 +27,7 @@ class PetsController < ApplicationController
   private
 
   def find_pet
-    @pet = Pet.find(params[:id])
+    @pet = Pet.includes(:species, :owner).find(params[:id])
   end
 
   def pet_params
