@@ -14,12 +14,12 @@ RSpec.describe "TrackerTypes", type: :request do
       get "/tracker_types"
       json = JSON.parse(response.body)
 
-      tracker_types = json["tracker_types"]
-      pagination = json["pagination"]
+      tracker_types = json["data"]
+      pagination = json["meta"]
 
       expect(response).to have_http_status(:ok)
       expect(tracker_types.size).to eq(5)
-      expect(pagination["total_count"]).to eq(5)
+      expect(pagination["total_items"]).to eq(5)
     end
 
     it "respects pagination parameters" do
@@ -29,12 +29,12 @@ RSpec.describe "TrackerTypes", type: :request do
       get "/tracker_types", params: { page: 2, items: 5 }
       json = JSON.parse(response.body)
 
-      tracker_types = json["tracker_types"]
-      pagination = json["pagination"]
+      tracker_types = json["data"]
+      pagination = json["meta"]
 
       expect(response).to have_http_status(:ok)
       expect(tracker_types.size).to eq(5)
-      expect(pagination["current_page"]).to eq(2)
+      expect(pagination["page"]).to eq(2)
     end
   end
 

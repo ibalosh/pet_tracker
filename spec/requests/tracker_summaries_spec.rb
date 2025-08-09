@@ -8,7 +8,7 @@ RSpec.describe "TrackerSummaries", type: :request do
 
       expect(response).to have_http_status(:ok)
       expect(json["tracker_summaries"]).to eq([])
-      expect(json["total_count"]).to eq(0)
+      expect(json["total_items"]).to eq(0)
     end
 
     it "returns single summary for multiple pets with same tracker_type and species" do
@@ -28,7 +28,7 @@ RSpec.describe "TrackerSummaries", type: :request do
       expect(json["tracker_summaries"].size).to eq(1)
       expect(json["tracker_summaries"].first["count"]).to eq(2)
       expect(json["tracker_summaries"].first["tracker_type"]["category"]).to eq("large")
-      expect(json["total_count"]).to eq(2)
+      expect(json["total_items"]).to eq(2)
     end
 
     # spec/requests/tracker_summaries_spec.rb
@@ -67,7 +67,7 @@ RSpec.describe "TrackerSummaries", type: :request do
       expect(tracker_data["pet_type"]["name"]).to eq("Dog")
       expect(tracker_data["tracker_type"]["category"]).to eq("medium")
       expect(tracker_data["count"]).to eq(1)
-      expect(json["total_count"]).to eq(1)
+      expect(json["total_items"]).to eq(1)
     end
 
     it "returns empty result when filtered by in_zone = true and all are false" do
@@ -81,7 +81,7 @@ RSpec.describe "TrackerSummaries", type: :request do
       json = JSON.parse(response.body)
 
       expect(json["tracker_summaries"]).to eq([])
-      expect(json["total_count"]).to eq(0)
+      expect(json["total_items"]).to eq(0)
     end
 
     it "filters by in_zone = false and returns matching results" do
@@ -102,7 +102,7 @@ RSpec.describe "TrackerSummaries", type: :request do
       expect(tracker_data["pet_type"]["name"]).to eq("Dog")
       expect(tracker_data["tracker_type"]["category"]).to eq("medium")
       expect(tracker_data["count"]).to eq(1)
-      expect(json["total_count"]).to eq(1)
+      expect(json["total_items"]).to eq(1)
     end
 
     it "filters by pet_type and returns correct results" do
@@ -127,7 +127,7 @@ RSpec.describe "TrackerSummaries", type: :request do
       expect(summary["pet_type"]["name"]).to eq("Cat")
       expect(summary["tracker_type"]["category"]).to eq("small")
       expect(summary["count"]).to eq(1)
-      expect(json["total_count"]).to eq(1)
+      expect(json["total_items"]).to eq(1)
     end
 
     it "returns empty result for unknown pet_type" do
@@ -141,7 +141,7 @@ RSpec.describe "TrackerSummaries", type: :request do
       json = JSON.parse(response.body)
 
       expect(json["tracker_summaries"].size).to eq(0)
-      expect(json["total_count"]).to eq(0)
+      expect(json["total_items"]).to eq(0)
     end
 
     it "filters by tracker_type and returns correct summary" do
@@ -158,7 +158,7 @@ RSpec.describe "TrackerSummaries", type: :request do
       json = JSON.parse(response.body)
 
       expect(json["tracker_summaries"].size).to eq(1)
-      expect(json["total_count"]).to eq(1)
+      expect(json["total_items"]).to eq(1)
     end
 
     it "returns empty result for unknown tracker_type" do
@@ -172,7 +172,7 @@ RSpec.describe "TrackerSummaries", type: :request do
       json = JSON.parse(response.body)
 
       expect(json["tracker_summaries"]).to eq([])
-      expect(json["total_count"]).to eq(0)
+      expect(json["total_items"]).to eq(0)
     end
 
     it "filters by pet_type and tracker_type together" do
@@ -196,7 +196,7 @@ RSpec.describe "TrackerSummaries", type: :request do
       json = JSON.parse(response.body)
       expect(json["tracker_summaries"].size).to eq(1)
       expect(json["tracker_summaries"].first["tracker_type"]["category"]).to eq("small")
-      expect(json["total_count"]).to eq(1)
+      expect(json["total_items"]).to eq(1)
     end
 
     it "filters by in_zone, pet_type, and tracker_type together" do
@@ -215,7 +215,7 @@ RSpec.describe "TrackerSummaries", type: :request do
 
       json = JSON.parse(response.body)
       expect(json["tracker_summaries"].size).to eq(1)
-      expect(json["total_count"]).to eq(1)
+      expect(json["total_items"]).to eq(1)
     end
   end
 end

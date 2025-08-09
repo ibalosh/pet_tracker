@@ -11,7 +11,7 @@ class TrackerSummariesController < ApplicationController
         species_map: species_map,
         tracker_type_map: tracker_type_map
       ).as_json,
-      total_count: summaries.sum(&:count)
+      total_items: summaries.sum(&:count)
     }
   end
 

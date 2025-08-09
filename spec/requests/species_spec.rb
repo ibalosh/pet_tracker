@@ -13,13 +13,13 @@ RSpec.describe "Species", type: :request do
       get "/species"
       json = JSON.parse(response.body)
 
-      species = json["species"]
-      pagination = json["pagination"]
+      species = json["data"]
+      pagination = json["meta"]
 
       expect(response).to have_http_status(:ok)
       expect(species.size).to eq(5)
-      expect(pagination["total_count"]).to eq(5)
-      expect(pagination["current_page"]).to eq(1)
+      expect(pagination["total_items"]).to eq(5)
+      expect(pagination["page"]).to eq(1)
       expect(pagination["total_pages"]).to eq(1)
     end
 
@@ -29,14 +29,14 @@ RSpec.describe "Species", type: :request do
       get "/species", params: { page: 2 }
       json = JSON.parse(response.body)
 
-      species = json["species"]
-      pagination = json["pagination"]
+      species = json["data"]
+      pagination = json["meta"]
 
       expect(response).to have_http_status(:ok)
       expect(species.size).to eq(5)
-      expect(pagination["current_page"]).to eq(2)
+      expect(pagination["page"]).to eq(2)
       expect(pagination["total_pages"]).to eq(2)
-      expect(pagination["total_count"]).to eq(10)
+      expect(pagination["total_items"]).to eq(10)
     end
   end
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Owners", type: :request do
+RSpec.describe "data", type: :request do
   describe "GET /owners" do
     it "returns http success" do
       get "/owners"
@@ -13,13 +13,13 @@ RSpec.describe "Owners", type: :request do
       get "/owners"
       json = JSON.parse(response.body)
 
-      owners = json["owners"]
-      pagination = json["pagination"]
+      owners = json["data"]
+      pagination = json["meta"]
 
       expect(response).to have_http_status(:ok)
       expect(owners.size).to eq(5)
-      expect(pagination["total_count"]).to eq(5)
-      expect(pagination["current_page"]).to eq(1)
+      expect(pagination["total_items"]).to eq(5)
+      expect(pagination["items_in_page"]).to eq(5)
       expect(pagination["total_pages"]).to eq(1)
     end
 
@@ -29,14 +29,14 @@ RSpec.describe "Owners", type: :request do
       get "/owners", params: { page: 2, items: 5 }
       json = JSON.parse(response.body)
 
-      owners = json["owners"]
-      pagination = json["pagination"]
+      owners = json["data"]
+      pagination = json["meta"]
 
       expect(response).to have_http_status(:ok)
       expect(owners.size).to eq(5)
-      expect(pagination["current_page"]).to eq(2)
+      expect(pagination["page"]).to eq(2)
       expect(pagination["total_pages"]).to eq(2)
-      expect(pagination["total_count"]).to eq(10)
+      expect(pagination["total_items"]).to eq(10)
     end
   end
 
