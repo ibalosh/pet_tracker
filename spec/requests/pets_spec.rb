@@ -11,12 +11,12 @@ RSpec.describe "Pets", type: :request do
       get "/pets"
       json = JSON.parse(response.body)
 
-      pets = json["pets"]
-      pagination = json["pagination"]
+      pets = json["data"]
+      pagination = json["meta"]
 
       expect(response).to have_http_status(:ok)
       expect(pets.size).to eq(5)
-      expect(pagination["total_count"]).to eq(5)
+      expect(pagination["total_items"]).to eq(5)
     end
 
     it "respects pagination parameters" do
@@ -25,12 +25,12 @@ RSpec.describe "Pets", type: :request do
       get "/pets", params: { page: 2, items: 5 }
       json = JSON.parse(response.body)
 
-      pets = json["pets"]
-      pagination = json["pagination"]
+      pets = json["data"]
+      pagination = json["meta"]
 
       expect(response).to have_http_status(:ok)
       expect(pets.size).to eq(5)
-      expect(pagination["current_page"]).to eq(2)
+      expect(pagination["page"]).to eq(2)
     end
   end
 

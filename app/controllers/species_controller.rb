@@ -1,10 +1,8 @@
 class SpeciesController < ApplicationController
   before_action :find_species, only: [ :show, :update, :destroy ]
   def index
-    species = Species.all
-    pagination_details, paginated_data = pagy(species)
-
-    render json: paginated_response("species", paginated_data.as_json, pagination_details)
+    page_obj, data = pagy(Species.all)
+    render json: paged_response(data, page_obj)
   end
 
   def show

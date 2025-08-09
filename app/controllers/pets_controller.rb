@@ -1,9 +1,8 @@
 class PetsController < ApplicationController
   before_action :find_pet, only: [ :show, :update, :destroy ]
   def index
-    pets = Pet.includes(:species, :owner).all
-    pagination_details, paginated_data = pagy(pets)
-    render json: paginated_response("pets", paginated_data.as_json, pagination_details)
+    page_obj, data = pagy(Pet.includes(:species, :owner).all)
+    render json: paged_response(data, page_obj)
   end
 
   def show

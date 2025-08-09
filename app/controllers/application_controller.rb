@@ -14,13 +14,14 @@ class ApplicationController < ActionController::API
     render json: { errors: exception.record.errors.full_messages }, status: :unprocessable_entity
   end
 
-  def paginated_response(data_name, json, pagy)
+  def paged_response(data, page_obj)
     {
-      data_name => json,
-      pagination: {
-        current_page: pagy.page,
-        total_pages:  pagy.pages,
-        total_count:  pagy.count
+      data:,
+      meta: {
+        page: page_obj.page,
+        items_in_page: page_obj.in,
+        total_pages:  page_obj.pages,
+        total_items:  page_obj.count
       }
     }
   end

@@ -2,9 +2,8 @@ class TrackerTypesController < ApplicationController
   before_action :find_tracker_type, only: [ :show, :update, :destroy ]
 
   def index
-    tracker_types = TrackerType.all.includes(:species)
-    pagination_details, paginated_data = pagy(tracker_types)
-    render json: paginated_response("tracker_types", paginated_data.as_json, pagination_details)
+    page_obj, data = pagy(TrackerType.all.includes(:species))
+    render json: paged_response(data, page_obj)
   end
 
   def show

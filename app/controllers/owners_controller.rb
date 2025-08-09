@@ -1,10 +1,8 @@
 class OwnersController < ApplicationController
   before_action :find_owner, only: [ :show, :update, :destroy ]
   def index
-    owners = Owner.all
-    pagination_details, paginated_data = pagy(owners)
-
-    render json: paginated_response("owners", paginated_data.as_json, pagination_details)
+    page_obj, data = pagy(Owner.all)
+    render json: paged_response(data, page_obj)
   end
 
   def show
