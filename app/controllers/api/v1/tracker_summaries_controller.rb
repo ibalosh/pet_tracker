@@ -2,18 +2,18 @@ module Api
   module V1
     class TrackerSummariesController < ApplicationController
       def index
-        summaries = Tracker.zone_summary(filters)
-
-        species_map = Species.where(id: summaries.map(&:species_id)).index_by(&:id)
-        tracker_type_map = TrackerType.where(id: summaries.map(&:tracker_type_id)).index_by(&:id)
+        summaries = Tracker.zone_summary_with_names(filters)
 
         render json: {
-          tracker_summaries: TrackerSummarySerializer.new(
-            summaries: summaries,
-            species_map: species_map,
-            tracker_type_map: tracker_type_map
-          ).as_json,
-          total_items: summaries.sum(&:count)
+          tracker_summaries: summaries.map { |s|
+            {
+              pet_type: s.species_name,
+              tracker_type: s.tracker_type_name,
+              in_zone: filters.fetch(:in_zone, false),
+              count: s.count
+            }
+          },
+          total_items: summaries.sum { |s| s[:count] }
         }
       end
 
