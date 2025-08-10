@@ -27,7 +27,7 @@ RSpec.describe "TrackerSummaries", type: :request do
 
       expect(json["tracker_summaries"].size).to eq(1)
       expect(json["tracker_summaries"].first["count"]).to eq(2)
-      expect(json["tracker_summaries"].first["tracker_type"]["category"]).to eq("large")
+      expect(json["tracker_summaries"].first["tracker_type"]).to eq("large")
       expect(json["total_items"]).to eq(2)
     end
 
@@ -64,8 +64,8 @@ RSpec.describe "TrackerSummaries", type: :request do
 
       tracker_data = json["tracker_summaries"].first
       expect(tracker_data).not_to be_nil
-      expect(tracker_data["pet_type"]["name"]).to eq("Dog")
-      expect(tracker_data["tracker_type"]["category"]).to eq("medium")
+      expect(tracker_data["pet_type"]).to eq("Dog")
+      expect(tracker_data["tracker_type"]).to eq("medium")
       expect(tracker_data["count"]).to eq(1)
       expect(json["total_items"]).to eq(1)
     end
@@ -99,8 +99,8 @@ RSpec.describe "TrackerSummaries", type: :request do
       json = JSON.parse(response.body)
 
       tracker_data = json["tracker_summaries"].first
-      expect(tracker_data["pet_type"]["name"]).to eq("Dog")
-      expect(tracker_data["tracker_type"]["category"]).to eq("medium")
+      expect(tracker_data["pet_type"]).to eq("Dog")
+      expect(tracker_data["tracker_type"]).to eq("medium")
       expect(tracker_data["count"]).to eq(1)
       expect(json["total_items"]).to eq(1)
     end
@@ -124,8 +124,8 @@ RSpec.describe "TrackerSummaries", type: :request do
 
       expect(json["tracker_summaries"].size).to eq(1)
       summary = json["tracker_summaries"].first
-      expect(summary["pet_type"]["name"]).to eq("Cat")
-      expect(summary["tracker_type"]["category"]).to eq("small")
+      expect(summary["pet_type"]).to eq("Cat")
+      expect(summary["tracker_type"]).to eq("small")
       expect(summary["count"]).to eq(1)
       expect(json["total_items"]).to eq(1)
     end
@@ -195,7 +195,7 @@ RSpec.describe "TrackerSummaries", type: :request do
 
       json = JSON.parse(response.body)
       expect(json["tracker_summaries"].size).to eq(1)
-      expect(json["tracker_summaries"].first["tracker_type"]["category"]).to eq("small")
+      expect(json["tracker_summaries"].first["tracker_type"]).to eq("small")
       expect(json["total_items"]).to eq(1)
     end
 

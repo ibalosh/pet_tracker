@@ -13,8 +13,13 @@ class Tracker < ApplicationRecord
   def self.zone_summary(filters = {})
     query = joins(:pet, :tracker_type)
 
+    # default to in_zone false, if parameter is not provided
     zone_value = filters[:in_zone].nil? ? false : filters[:in_zone]
+
+    # we always assume tracker is not lost, otherwise we can't detect if tracker is in zone
     query = query.where(lost_tracker: false, in_zone: zone_value)
+
+    # filtering by pet type and tracker type
     query = query.joins(pet: :species).where(species: { name: filters[:pet_type] }) if filters[:pet_type]
     query = query.joins(:tracker_type).where(tracker_types: { category: filters[:tracker_type] }) if filters[:tracker_type]
 

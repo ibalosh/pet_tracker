@@ -56,9 +56,9 @@ All data is exchanged as JSON.
 
 ### Tracker Summaries
 
-| Method | Endpoint             | Description                                                    |
-|--------|----------------------|----------------------------------------------------------------|
-| GET    | `/tracker_summaries` | Returns count of pets outside zone, grouped by tracker/species |
+| Method | Endpoint             | Description                                                         |
+|--------|----------------------|---------------------------------------------------------------------|
+| GET    | `/tracker_summaries` | Returns count of pets outside zone, grouped by tracker type/species |
 
 #### Query Parameters:
 

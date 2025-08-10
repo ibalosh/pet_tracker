@@ -1,3 +1,5 @@
+require "faker"
+
 puts "Cleaning database..."
 Tracker.destroy_all
 Pet.destroy_all
@@ -15,11 +17,11 @@ cat = Species.create!(name: "Cat")
 dog = Species.create!(name: "Dog")
 
 puts "Creating tracker types..."
-cat_tracker_types = %w[small large].map do |category|
+cat_tracker_types = %w[small big].map do |category|
   TrackerType.create!(category: category, species: cat)
 end
 
-dog_tracker_types = %w[small medium large].map do |category|
+dog_tracker_types = %w[small medium big].map do |category|
   TrackerType.create!(category: category, species: dog)
 end
 
@@ -28,9 +30,9 @@ pets = []
 
 owners.each_with_index do |owner, i|
   species = i.even? ? cat : dog
-  2.times do |j|
+  3.times do |j|
     pets << Pet.create!(
-      name: "#{species.name} #{i}-#{j}",
+      name: Faker::Name.name,
       species: species,
       owner: owner
     )
