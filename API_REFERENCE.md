@@ -4,13 +4,13 @@ All data is exchanged as JSON.
 
 ### Owners
 
-| Method | Endpoint           | Description                     |
-|--------|--------------------|---------------------------------|
-| GET    | `/owners`          | List owners with pagination     |
-| GET    | `/owners/:id`      | Fetch single owner              |
-| POST   | `/owners`          | Create owner                    |
-| PATCH  | `/owners/:id`      | Update owner                    |
-| DELETE | `/owners/:id`      | Delete owner                    |
+| Method | Endpoint               | Description                         |
+|--------|------------------------|-------------------------------------|
+| GET    | `/owners`              | List owners with pagination         |
+| GET    | `/owners/:id`          | Fetch single owner                  |
+| POST   | `/owners`              | Create owner                        |
+| PATCH  | `/owners/:id`          | Update owner                        |
+| DELETE | `/owners/:id`          | Delete owner                        |
 
 ### Species
 
@@ -34,13 +34,13 @@ All data is exchanged as JSON.
 
 ### Pets
 
-| Method | Endpoint        | Description                          |
-|--------|-----------------|--------------------------------------|
-| GET    | `/pets`         | List pets with pagination            |
-| GET    | `/pets/:id`     | Fetch single pet                     |
-| POST   | `/pets`         | Create pet (requires species/owner)  |
-| PATCH  | `/pets/:id`     | Update pet                           |
-| DELETE | `/pets/:id`     | Delete pet                           |
+| Method | Endpoint      | Description                          |
+|--------|---------------|--------------------------------------|
+| GET    | `/pets`       | List pets with pagination            |
+| GET    | `/pets/:id`   | Fetch single pet                     |
+| POST   | `/pets`       | Create pet (requires species/owner)  |
+| PATCH  | `/pets/:id`   | Update pet                           |
+| DELETE | `/pets/:id`   | Delete pet                           |
 
 > 🐱 Cats support `lost_tracker: true/false`.
 
@@ -56,9 +56,9 @@ All data is exchanged as JSON.
 
 ### Tracker Summaries
 
-| Method | Endpoint             | Description                                                   |
-|--------|----------------------|---------------------------------------------------------------|
-| GET    | `/tracker_summaries` | Returns count of pets outside zone, grouped by tracker/species |
+| Method | Endpoint             | Description                                                         |
+|--------|----------------------|---------------------------------------------------------------------|
+| GET    | `/tracker_summaries` | Returns count of pets outside zone, grouped by tracker type/species |
 
 #### Query Parameters:
 

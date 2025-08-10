@@ -1,13 +1,17 @@
 Rails.application.routes.draw do
   root "home#index"
 
-  resources :owners, only: [ :index, :show, :create, :update, :destroy ]
-  resources :pets, only: [ :index, :show, :create, :update, :destroy ]
-  resources :species, only: [ :index, :show, :create, :update, :destroy ]
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :owners, only: [ :index, :show, :create, :update, :destroy ]
+      resources :pets, only: [ :index, :show, :create, :update, :destroy ]
+      resources :species, only: [ :index, :show, :create, :update, :destroy ]
 
-  resources :trackers, only: [ :index, :show, :update, :create, :destroy ]
-  resources :tracker_types, only: [ :index, :show, :create, :update, :destroy ]
-  resources :tracker_summaries, only: [ :index ]
+      resources :trackers, only: [ :index, :show, :update, :create, :destroy ]
+      resources :tracker_types, only: [ :index, :show, :create, :update, :destroy ]
+      resources :tracker_summaries, only: [ :index ]
+    end
+  end
 
   # For non existing routes, show a custom default error message
   match "*unmatched", to: "application#render_route_not_found", via: :all

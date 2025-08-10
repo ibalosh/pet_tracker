@@ -1,17 +1,16 @@
 {
 	"info": {
-		"_postman_id": "dfff9596-5a80-49ad-bcf1-63c2e699e4b9",
+		"_postman_id": "a7c8fb4e-43a9-45a9-b023-6afeaec72fd3",
 		"name": "Pets",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "46004613",
-		"_collection_link": "https://igorbalos.postman.co/workspace/Igor-Balos's-Workspace~bffcbc85-8f91-4a8e-8102-e4d08fd05c19/collection/46004613-dfff9596-5a80-49ad-bcf1-63c2e699e4b9?action=share&source=collection_link&creator=46004613"
+		"_exporter_id": "1751"
 	},
 	"item": [
 		{
 			"name": "owners",
 			"item": [
 				{
-					"name": "http://localhost:3000/owners",
+					"name": "http://localhost:3000/api/v1/owners",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -33,13 +32,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/owners?page=1",
+							"raw": "http://localhost:3000/api/v1/owners?page=1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
+								"v1",
 								"owners"
 							],
 							"query": [
@@ -53,40 +54,7 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:3000/owners",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"Owner 22222\",\n    \"email\": \"owner21112222@example.com\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/owners",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"owners"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:3000/owners/id",
+					"name": "http://localhost:3000/api/v1/owners/id",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -96,47 +64,24 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/owners/132",
+							"raw": "http://localhost:3000/api/v1/owners/21",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
+								"v1",
 								"owners",
-								"132"
+								"21"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "http://localhost:3000/owners/id",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:3000/owners/13",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"owners",
-								"13"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:3000/owners",
+					"name": "http://localhost:3000/api/v1/owners",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -147,7 +92,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \n        \"name\": \"John Smith\",\n        \"email\": \"alice@example1.com\"\n    }",
+							"raw": "{\n    \"name\": \"Johnatan\",\n    \"email\": \"testexa@aaamplecom\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -155,14 +100,79 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/owners",
+							"raw": "http://localhost:3000/api/v1/owners",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
+								"v1",
 								"owners"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/api/v1/owners/id",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Johnatan Smithson\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/owners/22",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"owners",
+								"22"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/api/v1/owners/id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/owners/22",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"owners",
+								"22"
 							]
 						}
 					},
@@ -174,7 +184,7 @@
 			"name": "species",
 			"item": [
 				{
-					"name": "http://localhost:3000/species",
+					"name": "http://localhost:3000/api/v1/species",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -196,21 +206,29 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/species",
+							"raw": "http://localhost:3000/api/v1/species?page=1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
+								"v1",
 								"species"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "http://localhost:3000/species/id",
+					"name": "http://localhost:3000/api/v1/species/id",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -232,22 +250,24 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/species/19",
+							"raw": "http://localhost:3000/api/v1/species/6",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
+								"v1",
 								"species",
-								"19"
+								"6"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "http://localhost:3000/species",
+					"name": "http://localhost:3000/api/v1/species",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -258,7 +278,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Horse1\"\n}",
+							"raw": "{\n    \"name\": \"Cats\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -266,13 +286,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/species",
+							"raw": "http://localhost:3000/api/v1/species",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
+								"v1",
 								"species"
 							]
 						}
@@ -280,7 +302,7 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:3000/species/id",
+					"name": "http://localhost:3000/api/v1/species/id",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -299,15 +321,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/species/10",
+							"raw": "http://localhost:3000/api/v1/species/8",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
+								"v1",
 								"species",
-								"10"
+								"8"
 							]
 						}
 					},
@@ -319,7 +343,7 @@
 			"name": "pets",
 			"item": [
 				{
-					"name": "http://localhost:3000/pets",
+					"name": "http://localhost:3000/api/v1/pets",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -341,21 +365,29 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/pets",
+							"raw": "http://localhost:3000/api/v1/pets?page=5",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
+								"v1",
 								"pets"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "5"
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "http://localhost:3000/pets/id",
+					"name": "http://localhost:3000/api/v1/pets/id",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -377,22 +409,24 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/pets/114",
+							"raw": "http://localhost:3000/api/v1/pets/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
+								"v1",
 								"pets",
-								"114"
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "http://localhost:3000/pets",
+					"name": "http://localhost:3000/api/v1/pets",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -403,7 +437,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "   {\n        \"species_id\": 19,\n        \"owner_id\": 40,\n        \"name\": \"Micko\"\n   }",
+							"raw": "   {\n        \"owner_id\":2,\n        \"species_id\": 1,\n        \"name\": \"Micko\"\n   }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -411,13 +445,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/pets",
+							"raw": "http://localhost:3000/api/v1/pets",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
+								"v1",
 								"pets"
 							]
 						}
@@ -425,7 +461,7 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:3000/pets",
+					"name": "http://localhost:3000/api/v1/pets/id",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -444,15 +480,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/pets/22",
+							"raw": "http://localhost:3000/api/v1/pets/31",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
+								"v1",
 								"pets",
-								"22"
+								"31"
 							]
 						}
 					},
@@ -464,7 +502,7 @@
 			"name": "trackers",
 			"item": [
 				{
-					"name": "http://localhost:3000/trackers",
+					"name": "http://localhost:3000/api/v1/trackers",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -486,13 +524,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/trackers",
+							"raw": "http://localhost:3000/api/v1/trackers",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
+								"v1",
 								"trackers"
 							]
 						}
@@ -500,7 +540,7 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:3000/trackers/id",
+					"name": "http://localhost:3000/api/v1/trackers/id",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -522,22 +562,24 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/trackers/78",
+							"raw": "http://localhost:3000/api/v1/trackers/27",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
+								"v1",
 								"trackers",
-								"78"
+								"27"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "http://localhost:3000/trackers",
+					"name": "http://localhost:3000/api/v1/trackers",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -548,7 +590,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"in_zone\": false, \n        \"lost_tracker\": true,\n        \"pet_id\": 113,\n        \"tracker_type_id\": 52\n \n}",
+							"raw": "{\n        \"in_zone\": true, \n        \"lost_tracker\": true,\n        \"pet_id\": 21,\n        \"tracker_type_id\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -556,13 +598,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/trackers",
+							"raw": "http://localhost:3000/api/v1/trackers",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
+								"v1",
 								"trackers"
 							]
 						}
@@ -570,7 +614,43 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:3000/trackers/id",
+					"name": "http://localhost:3000/api/v1/trackers/id",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"in_zone\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/trackers/26",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"trackers",
+								"26"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/api/v1/trackers/id",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -589,49 +669,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/trackers/77",
+							"raw": "http://localhost:3000/api/v1/trackers/57",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
+								"v1",
 								"trackers",
-								"77"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:3000/trackers/id",
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"tracker\": {\n        \"in_zone\": false, \n        \"lost_tracker\": true\n    }\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/trackers/5",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"trackers",
-								"5"
+								"57"
 							]
 						}
 					},
@@ -643,7 +691,7 @@
 			"name": "tracker_types",
 			"item": [
 				{
-					"name": "http://localhost:3000/tracker_types",
+					"name": "http://localhost:3000/api/v1/tracker_types?page=2",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -665,55 +713,29 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/tracker_types",
+							"raw": "http://localhost:3000/api/v1/tracker_types?page=2",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
+								"v1",
 								"tracker_types"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:3000/tracker_types/id",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"species_id\": 13,\n    \"category\": \"smallish\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/tracker_types/26",
-							"protocol": "http",
-							"host": [
-								"localhost"
 							],
-							"port": "3000",
-							"path": [
-								"tracker_types",
-								"26"
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "http://localhost:3000/tracker_types/id",
+					"name": "http://localhost:3000/api/v1/tracker_types/id",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -735,22 +757,24 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/tracker_types/26",
+							"raw": "http://localhost:3000/api/v1/tracker_types/7",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
+								"v1",
 								"tracker_types",
-								"26"
+								"7"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "http://localhost:3000/tracker_types",
+					"name": "http://localhost:3000/api/v1/tracker_types",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -761,7 +785,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"species_id\": 13,\n    \"category\": \"megabig\"\n}",
+							"raw": "{\n    \"species_id\": 2,\n    \"category\": \"megalarge\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -769,13 +793,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/tracker_types",
+							"raw": "http://localhost:3000/api/v1/tracker_types",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
+								"v1",
 								"tracker_types"
 							]
 						}
@@ -783,7 +809,43 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:3000/tracker_types/id",
+					"name": "http://localhost:3000/api/v1/tracker_types/id",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"species_id\": 6,\n    \"category\": \"smallish\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/tracker_types/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"tracker_types",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/api/v1/tracker_types/id",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -802,13 +864,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/tracker_types/31",
+							"raw": "http://localhost:3000/api/v1/tracker_types/31",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
+								"v1",
 								"tracker_types",
 								"31"
 							]
@@ -822,7 +886,7 @@
 			"name": "tracker_summaries",
 			"item": [
 				{
-					"name": "http://localhost:3000/tracker_summaries",
+					"name": "http://localhost:3000/api/v1/tracker_summaries?parameters",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -844,19 +908,73 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/tracker_summaries?in_zone=false",
+							"raw": "http://localhost:3000/api/v1/tracker_summaries?pet_type=Cat&in_zone=true&tracker_type=big",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
+								"v1",
+								"tracker_summaries"
+							],
+							"query": [
+								{
+									"key": "pet_type",
+									"value": "Cat"
+								},
+								{
+									"key": "in_zone",
+									"value": "true"
+								},
+								{
+									"key": "tracker_type",
+									"value": "big"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/api/v1/tracker_summaries",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/tracker_summaries?in_zone=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
 								"tracker_summaries"
 							],
 							"query": [
 								{
 									"key": "in_zone",
-									"value": "false"
+									"value": "true"
 								}
 							]
 						}
@@ -888,12 +1006,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000",
+					"raw": "http://localhost:3000/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000"
+					"port": "3000",
+					"path": [
+						""
+					]
 				}
 			},
 			"response": []

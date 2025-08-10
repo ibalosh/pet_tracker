@@ -48,21 +48,26 @@ Detailed API usage and endpoints are documented in [API_REFERENCE.md](API_REFERE
 - Normalized db schema
 - In-memory SQLite for easy testing & setup & swapping
 - API endpoints for data ingestion and querying, with pagination
+  - in order to paginate use `?page=X` query parameter
 
 #### Assumptions
 
-- `in_zone` is **not calculated dynamically**, but a stored boolean field in the `trackers` table.
+- `in_zone` is **not calculated dynamically**, but a stored boolean field in the `trackers` table
 - The `lost_tracker` attribute:
-    - Is only valid for **cats**.
+    - Is only valid for **cats**
     - Enforced via a model validation on trackers
+    - if tracker is lost, we don't count that entry containing it in in_zone=true/false calculation since we can't know whether Pet is in zone
+- The `tracker_type` can only have one type of category per species:
+  - category `small` can be created only once for `dog`
 - The `/tracker_summaries` endpoint applies filters as follows:
     - If the `in_zone` filter is **not provided**, it's used by default value `false`
     - Only **trackers with `lost_tracker: false`** are included in the summary
-    - Filtering by `pet_type` (e.g. `"Dog"` or `"Cat"`) and `tracker_type` (e.g. `"small"`, `"medium"`) is optional.
-    - If no filters are provided, all trackers are included in the summary.
+    - Filtering by `pet_type` (e.g. `"Dog"` or `"Cat"`) and `tracker_type` (e.g. `"small"`, `"medium"`) is optional
+    - If no filters are provided, all trackers are included in the summary
 - The summary data is grouped by:
     - `species_id` (i.e. pet type)
     - `tracker_type_id` (i.e. tracker type)
+- Pet can have multiple trackers
 
 ### Postman Collection
 
