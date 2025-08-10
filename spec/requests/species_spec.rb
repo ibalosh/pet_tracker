@@ -79,7 +79,7 @@ RSpec.describe "Species", type: :request do
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
-      expect(json["errors"]).to include("Name can't be blank")
+      expect(json["errors"]).to include("Name can't be blank.")
     end
 
     it "returns error when name is not unique" do
@@ -89,7 +89,7 @@ RSpec.describe "Species", type: :request do
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
-      expect(json["errors"]).to include("Name has already been taken")
+      expect(json["errors"]).to include("Name has already been taken.")
     end
 
     it "returns error when name is too long" do
@@ -109,7 +109,7 @@ RSpec.describe "Species", type: :request do
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
-      expect(json["errors"]).to include("Name has already been taken")
+      expect(json["errors"]).to include("Name has already been taken.")
     end
   end
 
@@ -131,7 +131,7 @@ RSpec.describe "Species", type: :request do
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
-      expect(json["errors"]).to include("Name can't be blank")
+      expect(json["errors"]).to include("Name can't be blank.")
     end
 
     it "returns not found for non-existent species" do

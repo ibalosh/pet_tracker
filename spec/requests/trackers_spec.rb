@@ -70,7 +70,7 @@ RSpec.describe "Trackers", type: :request do
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
-      expect(json["errors"]).to include("Pet must exist")
+      expect(json["errors"]).to include("Pet must exist.")
     end
   end
 
@@ -96,7 +96,7 @@ RSpec.describe "Trackers", type: :request do
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
-      expect(json["errors"]).to include("Pet must exist")
+      expect(json["errors"]).to include("Pet must exist.")
     end
 
     it "returns not found for non-existent tracker" do

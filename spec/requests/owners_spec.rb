@@ -86,7 +86,7 @@ RSpec.describe "Owners", type: :request do
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
-      expect(json["errors"]).to include("Name can't be blank")
+      expect(json["errors"]).to include("Name can't be blank.")
     end
 
     it "returns error when email is missing" do
@@ -94,7 +94,7 @@ RSpec.describe "Owners", type: :request do
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
-      expect(json["errors"]).to include("Email can't be blank")
+      expect(json["errors"]).to include("Email can't be blank.")
     end
 
     it "returns error for invalid email format" do
@@ -102,7 +102,7 @@ RSpec.describe "Owners", type: :request do
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
-      expect(json["errors"]).to include("Email is invalid")
+      expect(json["errors"]).to include("Email is invalid.")
     end
 
     it "returns error for duplicate email" do
@@ -112,7 +112,7 @@ RSpec.describe "Owners", type: :request do
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
-      expect(json["errors"]).to include("Email has already been taken")
+      expect(json["errors"]).to include("Email has already been taken.")
     end
   end
 
@@ -134,7 +134,7 @@ RSpec.describe "Owners", type: :request do
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
-      expect(json["errors"]).to include("Email is invalid")
+      expect(json["errors"]).to include("Email is invalid.")
     end
 
     it "returns not found for non-existent owner" do

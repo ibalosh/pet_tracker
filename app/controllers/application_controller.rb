@@ -21,7 +21,7 @@ class ApplicationController < ActionController::API
   end
 
   def render_error(messages, status)
-    render json: { errors: Array.wrap(messages) }, status:
+    render json: { errors: Array(messages).map { |m| m.chomp(".") + "." } }, status:
   end
 
   def paged_response(resource_name, data, page_obj)
