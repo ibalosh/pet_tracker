@@ -4,8 +4,8 @@ module Api
       before_action :find_owner, only: [ :show, :update, :destroy ]
 
       def index
-        page_obj, data = pagy(Owner.all)
-        render json: paged_response("owners", OwnerSerializer.collection(data), page_obj)
+        page_obj, data = paginate(Owner.all)
+        render json: paginated_response("owners", OwnerSerializer.collection(data), page_obj)
       end
 
       def show

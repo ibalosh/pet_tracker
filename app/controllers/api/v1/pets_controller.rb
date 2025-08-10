@@ -4,8 +4,8 @@ module Api
       before_action :find_pet, only: [ :show, :destroy, :update ]
 
       def index
-        page_obj, data = pagy(Pet.includes(:species, :owner).all)
-        render json: paged_response("pets", PetSerializer.collection(data), page_obj)
+        page_obj, data = paginate(Pet.includes(:species, :owner).all)
+        render json: paginated_response("pets", PetSerializer.collection(data), page_obj)
       end
 
       def show

@@ -4,8 +4,8 @@ module Api
       before_action :find_tracker_type, only: [ :show, :update, :destroy ]
 
       def index
-        page_obj, data = pagy(TrackerType.all.includes(:species))
-        render json: paged_response("tracker_types", TrackerTypeSerializer.collection(data), page_obj)
+        page_obj, data = paginate(TrackerType.all.includes(:species))
+        render json: paginated_response("tracker_types", TrackerTypeSerializer.collection(data), page_obj)
       end
 
       def show

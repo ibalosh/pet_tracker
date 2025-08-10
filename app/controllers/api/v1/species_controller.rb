@@ -4,8 +4,8 @@ module Api
       before_action :find_species, only: [ :show, :update, :destroy ]
 
       def index
-        page_obj, data = pagy(Species.all)
-        render json: paged_response("species", SpeciesSerializer.collection(data), page_obj)
+        page_obj, data = paginate(Species.all)
+        render json: paginated_response("species", SpeciesSerializer.collection(data), page_obj)
       end
 
       def show
