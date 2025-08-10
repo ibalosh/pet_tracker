@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "TrackerSummaries", type: :request do
-  describe "GET /tracker_summaries" do
+  describe "GET /api/v1/tracker_summaries" do
     it "returns empty list when no data exists" do
-      get "/tracker_summaries"
+      get "/api/v1/tracker_summaries"
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:ok)
@@ -22,7 +22,7 @@ RSpec.describe "TrackerSummaries", type: :request do
       Tracker.create!(pet: pet1, tracker_type: type, in_zone: false)
       Tracker.create!(pet: pet2, tracker_type: type, in_zone: false)
 
-      get "/tracker_summaries", params: { in_zone: false }
+      get "/api/v1/tracker_summaries", params: { in_zone: false }
       json = JSON.parse(response.body)
 
       expect(json["tracker_summaries"].size).to eq(1)
@@ -31,7 +31,7 @@ RSpec.describe "TrackerSummaries", type: :request do
       expect(json["total_items"]).to eq(2)
     end
 
-    # spec/requests/tracker_summaries_spec.rb
+    # spec/requests/api/v1/tracker_summaries_spec.rb
     it "aggregates correctly with mixed owners and pets" do
       dog = Species.create!(name: "Dog")
       type = TrackerType.create!(category: "medium", species: dog)
@@ -45,7 +45,7 @@ RSpec.describe "TrackerSummaries", type: :request do
       Tracker.create!(pet: pet1, tracker_type: type, in_zone: false)
       Tracker.create!(pet: pet2, tracker_type: type, in_zone: false)
 
-      get "/tracker_summaries", params: { in_zone: false }
+      get "/api/v1/tracker_summaries", params: { in_zone: false }
       json = JSON.parse(response.body)
 
       expect(json["tracker_summaries"].size).to eq(1)
@@ -59,7 +59,7 @@ RSpec.describe "TrackerSummaries", type: :request do
       pet = Pet.create!(name: "Rex", species: dog, owner: owner)
       Tracker.create!(pet: pet, tracker_type: tracker_type, in_zone: false)
 
-      get "/tracker_summaries"
+      get "/api/v1/tracker_summaries"
       json = JSON.parse(response.body)
 
       tracker_data = json["tracker_summaries"].first
@@ -77,7 +77,7 @@ RSpec.describe "TrackerSummaries", type: :request do
       pet = Pet.create!(name: "Rex", species: dog, owner: owner)
       Tracker.create!(pet: pet, tracker_type: type, in_zone: false)
 
-      get "/tracker_summaries", params: { in_zone: true }
+      get "/api/v1/tracker_summaries", params: { in_zone: true }
       json = JSON.parse(response.body)
 
       expect(json["tracker_summaries"]).to eq([])
@@ -95,7 +95,7 @@ RSpec.describe "TrackerSummaries", type: :request do
       Tracker.create!(pet: pet, tracker_type: type, in_zone: false)
       Tracker.create!(pet: pet2, tracker_type: type, in_zone: true)
 
-      get "/tracker_summaries", params: { in_zone: false }
+      get "/api/v1/tracker_summaries", params: { in_zone: false }
       json = JSON.parse(response.body)
 
       tracker_data = json["tracker_summaries"].first
@@ -119,7 +119,7 @@ RSpec.describe "TrackerSummaries", type: :request do
       Tracker.create!(pet: cat_pet, tracker_type: small_cat_tracker, in_zone: false)
       Tracker.create!(pet: dog_pet, tracker_type: medium_dog_tracker, in_zone: false)
 
-      get "/tracker_summaries", params: { in_zone: false, pet_type: "Cat" }
+      get "/api/v1/tracker_summaries", params: { in_zone: false, pet_type: "Cat" }
       json = JSON.parse(response.body)
 
       expect(json["tracker_summaries"].size).to eq(1)
@@ -137,7 +137,7 @@ RSpec.describe "TrackerSummaries", type: :request do
       pet = Pet.create!(name: "Rex", species: dog, owner: owner)
       Tracker.create!(pet: pet, tracker_type: tracker_type, in_zone: false)
 
-      get "/tracker_summaries", params: { pet_type: "Dragon" }
+      get "/api/v1/tracker_summaries", params: { pet_type: "Dragon" }
       json = JSON.parse(response.body)
 
       expect(json["tracker_summaries"].size).to eq(0)
@@ -154,7 +154,7 @@ RSpec.describe "TrackerSummaries", type: :request do
       Tracker.create!(pet: pet_rex, tracker_type: tracker_type_medium, in_zone: false)
       Tracker.create!(pet: pet_wolf, tracker_type: tracker_type_large, in_zone: false)
 
-      get "/tracker_summaries", params: { tracker_type: "medium" }
+      get "/api/v1/tracker_summaries", params: { tracker_type: "medium" }
       json = JSON.parse(response.body)
 
       expect(json["tracker_summaries"].size).to eq(1)
@@ -168,7 +168,7 @@ RSpec.describe "TrackerSummaries", type: :request do
       pet = Pet.create!(name: "Rex", species: dog, owner: owner)
       Tracker.create!(pet: pet, tracker_type: tracker_type, in_zone: false)
 
-      get "/tracker_summaries", params: { tracker_type: "giga" }
+      get "/api/v1/tracker_summaries", params: { tracker_type: "giga" }
       json = JSON.parse(response.body)
 
       expect(json["tracker_summaries"]).to eq([])
@@ -187,7 +187,7 @@ RSpec.describe "TrackerSummaries", type: :request do
       Tracker.create!(pet: pet1, tracker_type: small_tracker, in_zone: false)
       Tracker.create!(pet: pet2, tracker_type: medium_tracker, in_zone: false)
 
-      get "/tracker_summaries", params: {
+      get "/api/v1/tracker_summaries", params: {
         in_zone: false,
         pet_type: "Cat",
         tracker_type: "small"
@@ -207,7 +207,7 @@ RSpec.describe "TrackerSummaries", type: :request do
 
       Tracker.create!(pet: pet, tracker_type: type, in_zone: false)
 
-      get "/tracker_summaries", params: {
+      get "/api/v1/tracker_summaries", params: {
         in_zone: false,
         pet_type: "Dog",
         tracker_type: "large"

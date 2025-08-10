@@ -1,16 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe "Species", type: :request do
-  describe "GET /species" do
+  describe "GET /api/v1/species" do
     it "returns http success" do
-      get "/species"
+      get "/api/v1/species"
       expect(response).to have_http_status(:success)
     end
 
     it "returns paginated list of species" do
       create_list(:species, 5)
 
-      get "/species"
+      get "/api/v1/species"
       json = JSON.parse(response.body)
 
       species = json["species"]
@@ -26,7 +26,7 @@ RSpec.describe "Species", type: :request do
     it "respects pagination parameters" do
       create_list(:species, 10)
 
-      get "/species", params: { page: 2 }
+      get "/api/v1/species", params: { page: 2 }
       json = JSON.parse(response.body)
 
       species = json["species"]
@@ -40,11 +40,11 @@ RSpec.describe "Species", type: :request do
     end
   end
 
-  describe "GET /species/:id" do
+  describe "GET /api/v1/species/:id" do
     it "returns single species" do
       species = create(:species)
 
-      get "/species/#{species.id}"
+      get "/api/v1/species/#{species.id}"
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:ok)
@@ -53,7 +53,7 @@ RSpec.describe "Species", type: :request do
     end
 
     it "returns not found for non-existent species" do
-      get "/species/999"
+      get "/api/v1/species/999"
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:not_found)
@@ -61,9 +61,9 @@ RSpec.describe "Species", type: :request do
     end
   end
 
-  describe "POST /species" do
+  describe "POST /api/v1/species" do
     it "creates a new species" do
-      post "/species", params: { name: "Cat" }
+      post "/api/v1/species", params: { name: "Cat" }
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:created)
@@ -71,11 +71,11 @@ RSpec.describe "Species", type: :request do
     end
 
     it "increases species count" do
-      expect { post "/species", params: { name: "Dog" } }.to change(Species, :count).by(1)
+      expect { post "/api/v1/species", params: { name: "Dog" } }.to change(Species, :count).by(1)
     end
 
     it "returns error when name is missing" do
-      post "/species", params: {}
+      post "/api/v1/species", params: {}
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
@@ -85,7 +85,7 @@ RSpec.describe "Species", type: :request do
     it "returns error when name is not unique" do
       create(:species, name: "Dog")
 
-      post "/species", params: { name: "Dog" }
+      post "/api/v1/species", params: { name: "Dog" }
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
@@ -94,7 +94,7 @@ RSpec.describe "Species", type: :request do
 
     it "returns error when name is too long" do
       long_name = "a" * 51
-      post "/species", params: { name: long_name }
+      post "/api/v1/species", params: { name: long_name }
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
@@ -102,10 +102,10 @@ RSpec.describe "Species", type: :request do
     end
 
     it "returns error when trying to add two species with the same name" do
-      post "/species", params: { name: "Lion" }
+      post "/api/v1/species", params: { name: "Lion" }
       expect(response).to have_http_status(:created)
 
-      post "/species", params: { name: "Lion" }
+      post "/api/v1/species", params: { name: "Lion" }
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
@@ -113,11 +113,11 @@ RSpec.describe "Species", type: :request do
     end
   end
 
-  describe "PATCH /species/:id" do
+  describe "PATCH /api/v1/species/:id" do
     it "updates an existing species" do
       species = create(:species, name: "Old")
 
-      patch "/species/#{species.id}", params: { name: "New" }
+      patch "/api/v1/species/#{species.id}", params: { name: "New" }
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:ok)
@@ -127,7 +127,7 @@ RSpec.describe "Species", type: :request do
     it "returns error when updating with blank name" do
       species = create(:species)
 
-      patch "/species/#{species.id}", params: { name: "" }
+      patch "/api/v1/species/#{species.id}", params: { name: "" }
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
@@ -135,7 +135,7 @@ RSpec.describe "Species", type: :request do
     end
 
     it "returns not found for non-existent species" do
-      patch "/species/999", params: { name: "Ghost" }
+      patch "/api/v1/species/999", params: { name: "Ghost" }
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:not_found)
@@ -143,19 +143,19 @@ RSpec.describe "Species", type: :request do
     end
   end
 
-  describe "DELETE /species/:id" do
+  describe "DELETE /api/v1/species/:id" do
     it "deletes an existing species" do
       species = create(:species)
 
       expect {
-        delete "/species/#{species.id}"
+        delete "/api/v1/species/#{species.id}"
       }.to change(Species, :count).by(-1)
 
       expect(response).to have_http_status(:no_content)
     end
 
     it "returns not found for non-existent species" do
-      delete "/species/999"
+      delete "/api/v1/species/999"
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:not_found)

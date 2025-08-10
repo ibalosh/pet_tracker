@@ -1,16 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe "Owners", type: :request do
-  describe "GET /owners" do
+  describe "GET /api/v1/owners" do
     it "returns http success" do
-      get "/owners"
+      get "/api/v1/owners"
       expect(response).to have_http_status(:success)
     end
 
     it "returns paginated list of owners" do
       create_list(:owner, 5)
 
-      get "/owners"
+      get "/api/v1/owners"
       json = JSON.parse(response.body)
 
       owners = json["owners"]
@@ -26,7 +26,7 @@ RSpec.describe "Owners", type: :request do
     it "respects pagination parameters" do
       create_list(:owner, 10)
 
-      get "/owners", params: { page: 2, items: 5 }
+      get "/api/v1/owners", params: { page: 2, items: 5 }
       json = JSON.parse(response.body)
 
       owners = json["owners"]
@@ -40,11 +40,11 @@ RSpec.describe "Owners", type: :request do
     end
   end
 
-  describe "GET /owners/:id" do
+  describe "GET /api/v1/owners/:id" do
     it "returns single owner" do
       owner = create(:owner)
 
-      get "/owners/#{owner.id}"
+      get "/api/v1/owners/#{owner.id}"
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:ok)
@@ -53,7 +53,7 @@ RSpec.describe "Owners", type: :request do
     end
 
     it "returns not found for non-existent owner" do
-      get "/owners/999"
+      get "/api/v1/owners/999"
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:not_found)
@@ -61,9 +61,9 @@ RSpec.describe "Owners", type: :request do
     end
   end
 
-  describe "POST /owners" do
+  describe "POST /api/v1/owners" do
     it "creates a new owner" do
-      post "/owners", params: { name: "Alice", email: "alice@example.com" }
+      post "/api/v1/owners", params: { name: "Alice", email: "alice@example.com" }
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:created)
@@ -72,7 +72,7 @@ RSpec.describe "Owners", type: :request do
     end
 
     it "creates a new owner" do
-      expect { post "/owners", params: { name: "Alice", email: "alice@example.com" } }.
+      expect { post "/api/v1/owners", params: { name: "Alice", email: "alice@example.com" } }.
         to change(Owner, :count).by(1)
 
       json = JSON.parse(response.body)
@@ -82,7 +82,7 @@ RSpec.describe "Owners", type: :request do
     end
 
     it "returns error when name is missing" do
-      post "/owners", params: { email: "alice@example.com" }
+      post "/api/v1/owners", params: { email: "alice@example.com" }
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
@@ -90,7 +90,7 @@ RSpec.describe "Owners", type: :request do
     end
 
     it "returns error when email is missing" do
-      post "/owners", params: { name: "Alice" }
+      post "/api/v1/owners", params: { name: "Alice" }
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
@@ -98,7 +98,7 @@ RSpec.describe "Owners", type: :request do
     end
 
     it "returns error for invalid email format" do
-      post "/owners", params: { name: "Alice", email: "invalid_email" }
+      post "/api/v1/owners", params: { name: "Alice", email: "invalid_email" }
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
@@ -108,7 +108,7 @@ RSpec.describe "Owners", type: :request do
     it "returns error for duplicate email" do
       create(:owner, email: "alice@example.com")
 
-      post "/owners", params: { name: "Another", email: "alice@example.com" }
+      post "/api/v1/owners", params: { name: "Another", email: "alice@example.com" }
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
@@ -116,11 +116,11 @@ RSpec.describe "Owners", type: :request do
     end
   end
 
-  describe "PATCH /owners/:id" do
+  describe "PATCH /api/v1/owners/:id" do
     it "updates an existing owner" do
       owner = create(:owner, name: "Old Name")
 
-      patch "/owners/#{owner.id}", params: { name: "New Name" }
+      patch "/api/v1/owners/#{owner.id}", params: { name: "New Name" }
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:ok)
@@ -130,7 +130,7 @@ RSpec.describe "Owners", type: :request do
     it "returns validation error on invalid update" do
       owner = create(:owner)
 
-      patch "/owners/#{owner.id}", params: { email: "bad" }
+      patch "/api/v1/owners/#{owner.id}", params: { email: "bad" }
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
@@ -138,7 +138,7 @@ RSpec.describe "Owners", type: :request do
     end
 
     it "returns not found for non-existent owner" do
-      patch "/owners/999", params: { name: "Ghost" }
+      patch "/api/v1/owners/999", params: { name: "Ghost" }
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:not_found)
@@ -146,19 +146,19 @@ RSpec.describe "Owners", type: :request do
     end
   end
 
-  describe "DELETE /owners/:id" do
+  describe "DELETE /api/v1/owners/:id" do
     it "deletes an existing owner" do
       owner = create(:owner)
 
       expect {
-        delete "/owners/#{owner.id}"
+        delete "/api/v1/owners/#{owner.id}"
       }.to change(Owner, :count).by(-1)
 
       expect(response).to have_http_status(:no_content)
     end
 
     it "returns not found when deleting non-existent owner" do
-      delete "/owners/999"
+      delete "/api/v1/owners/999"
       json = JSON.parse(response.body)
 
       expect(response).to have_http_status(:not_found)
