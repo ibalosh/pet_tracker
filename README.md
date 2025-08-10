@@ -48,6 +48,7 @@ Detailed API usage and endpoints are documented in [API_REFERENCE.md](API_REFERE
 - Normalized db schema
 - In-memory SQLite for easy testing & setup & swapping
 - API endpoints for data ingestion and querying, with pagination
+  - in order to paginate use `?page=X` query parameter
 
 #### Assumptions
 
@@ -55,6 +56,8 @@ Detailed API usage and endpoints are documented in [API_REFERENCE.md](API_REFERE
 - The `lost_tracker` attribute:
     - Is only valid for **cats**.
     - Enforced via a model validation on trackers
+- The `tracker_type` can only have one type of category per species:
+  - category `small` can be created only once for `dog`
 - The `/tracker_summaries` endpoint applies filters as follows:
     - If the `in_zone` filter is **not provided**, it's used by default value `false`
     - Only **trackers with `lost_tracker: false`** are included in the summary
